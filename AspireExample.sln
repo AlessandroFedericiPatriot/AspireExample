@@ -2,20 +2,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.AppHost", "AspireExample.AppHost\AspireExample.AppHost.csproj", "{202E3ACE-5B9A-498E-B07F-B4911A956357}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.AppHost", "src\AspireExample.AppHost\AspireExample.AppHost.csproj", "{202E3ACE-5B9A-498E-B07F-B4911A956357}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.ServiceDefaults", "AspireExample.ServiceDefaults\AspireExample.ServiceDefaults.csproj", "{622DF609-E186-4EFA-A15D-6FF6AAECFC18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.ServiceDefaults", "src\AspireExample.ServiceDefaults\AspireExample.ServiceDefaults.csproj", "{622DF609-E186-4EFA-A15D-6FF6AAECFC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.ApiService", "AspireExample.ApiService\AspireExample.ApiService.csproj", "{13323E22-026F-473D-89EB-C8088F4ACCF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.ApiService", "src\AspireExample.ApiService\AspireExample.ApiService.csproj", "{13323E22-026F-473D-89EB-C8088F4ACCF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Web", "AspireExample.Web\AspireExample.Web.csproj", "{A6F80BC5-C989-4910-8E4C-9C30A52C425F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Web", "src\AspireExample.Web\AspireExample.Web.csproj", "{A6F80BC5-C989-4910-8E4C-9C30A52C425F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Tests", "AspireExample.Tests\AspireExample.Tests.csproj", "{093698FE-9DE4-48AC-99CD-5D8724F96936}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Tests", "tests\AspireExample.Tests\AspireExample.Tests.csproj", "{093698FE-9DE4-48AC-99CD-5D8724F96936}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{48CB1413-CCFF-4908-90B7-D153EBAF45E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_docs", "_docs", "{48CB1413-CCFF-4908-90B7-D153EBAF45E8}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{4C3A0DD7-FD5C-43A1-AAF6-C0C1E43467D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Application", "src\AspireExample.Application\AspireExample.Application.csproj", "{815429C8-CADD-4278-8F41-001E6FC9D126}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Infrastructure", "src\AspireExample.Infrastructure\AspireExample.Infrastructure.csproj", "{15737F9C-6E02-4863-95DA-1EAC3C41373D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C8D964E7-9AC9-4D4E-94AE-283F43DDD13A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3DD11CEA-DBCA-4890-B9B3-7B76139FB0B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B0794BE-4CBA-4BFF-82F0-21ABB4C03285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,8 +55,25 @@ Global
 		{093698FE-9DE4-48AC-99CD-5D8724F96936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{093698FE-9DE4-48AC-99CD-5D8724F96936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{093698FE-9DE4-48AC-99CD-5D8724F96936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815429C8-CADD-4278-8F41-001E6FC9D126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815429C8-CADD-4278-8F41-001E6FC9D126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815429C8-CADD-4278-8F41-001E6FC9D126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815429C8-CADD-4278-8F41-001E6FC9D126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15737F9C-6E02-4863-95DA-1EAC3C41373D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15737F9C-6E02-4863-95DA-1EAC3C41373D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15737F9C-6E02-4863-95DA-1EAC3C41373D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15737F9C-6E02-4863-95DA-1EAC3C41373D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{202E3ACE-5B9A-498E-B07F-B4911A956357} = {4C3A0DD7-FD5C-43A1-AAF6-C0C1E43467D2}
+		{622DF609-E186-4EFA-A15D-6FF6AAECFC18} = {4C3A0DD7-FD5C-43A1-AAF6-C0C1E43467D2}
+		{13323E22-026F-473D-89EB-C8088F4ACCF5} = {C8D964E7-9AC9-4D4E-94AE-283F43DDD13A}
+		{A6F80BC5-C989-4910-8E4C-9C30A52C425F} = {C8D964E7-9AC9-4D4E-94AE-283F43DDD13A}
+		{093698FE-9DE4-48AC-99CD-5D8724F96936} = {3B0794BE-4CBA-4BFF-82F0-21ABB4C03285}
+		{815429C8-CADD-4278-8F41-001E6FC9D126} = {3DD11CEA-DBCA-4890-B9B3-7B76139FB0B1}
+		{15737F9C-6E02-4863-95DA-1EAC3C41373D} = {3DD11CEA-DBCA-4890-B9B3-7B76139FB0B1}
 	EndGlobalSection
 EndGlobal
