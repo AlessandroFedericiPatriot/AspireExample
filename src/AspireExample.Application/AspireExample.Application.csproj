@@ -2,4 +2,11 @@
   <ItemGroup>
     <ProjectReference Include="..\AspireExample.Domain\AspireExample.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Digests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
 </Project>
