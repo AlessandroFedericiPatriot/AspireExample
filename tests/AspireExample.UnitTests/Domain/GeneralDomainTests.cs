@@ -1,16 +1,18 @@
-﻿using AspireExample.Domain;
+﻿using AspireExample.Application;
+using AspireExample.Domain;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace AspireExample.UnitTests
+namespace AspireExample.UnitTests.Domain
 {
-    public class DomainGeneral
-    {
+    public class GeneralDomainTests
+    {       
         [Fact]
         public void FileDigest_creation()
         {
             var digest = new FileDigest(
-                uploadId: FileUploadId.From(1), 
+                uploadId: FileUploadId.From(1),
                 subject: "subject",
-                summary: null, 
+                summary: null,
                 details: null);
         }
 
@@ -19,7 +21,7 @@ namespace AspireExample.UnitTests
         {
             var upload = new FileUpload(
                 fileName: "file.txt",
-                location: new Uri("http://localhost"), 
+                location: new Uri("http://localhost"),
                 contentType: "text/plain",
                 size: 123);
         }
