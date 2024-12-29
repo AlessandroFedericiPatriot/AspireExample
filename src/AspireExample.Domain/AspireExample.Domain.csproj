@@ -1,2 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" />
+    <PackageReference Include="Ardalis.Result" />
+    <PackageReference Include="Vogen" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+  </ItemGroup>
 </Project>

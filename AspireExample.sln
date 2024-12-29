@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.IntegrationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireExample.Application", "src\AspireExample.Application\AspireExample.Application.csproj", "{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.SharedKernel", "6.SharedKernel", "{7ACC7BC4-F7FD-4CC8-9C8F-C3FD1373C9EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +99,6 @@ Global
 		{19A96FAE-DEBC-4445-840E-58772746257A} = {3B0794BE-4CBA-4BFF-82F0-21ABB4C03285}
 		{10C006CD-23E1-4A9C-AA41-1E180FC67E4C} = {3B0794BE-4CBA-4BFF-82F0-21ABB4C03285}
 		{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0} = {3DD11CEA-DBCA-4890-B9B3-7B76139FB0B1}
+		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F} = {7ACC7BC4-F7FD-4CC8-9C8F-C3FD1373C9EF}
 	EndGlobalSection
 EndGlobal
