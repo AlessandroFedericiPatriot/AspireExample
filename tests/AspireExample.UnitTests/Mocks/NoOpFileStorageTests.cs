@@ -1,16 +1,12 @@
-﻿using AspireExample.Application.Interfaces;
-using AspireExample.Application.Services;
-using AspireExample.Domain;
-using FluentAssertions;
+﻿namespace AspireExample.UnitTests.Mocks;
 
-namespace AspireExample.UnitTests.Mocks;
-
-public class NoOpFileStorageTests(IFileStorage fileStorage)
+public class NoOpFileStorageTests(
+    IFileStorage fileStorage)
 {
     [Fact]
     public void Receives_NoOpFileStorage()
-    {
-        fileStorage.GetType().Should().Be(typeof(NoOpFileStorage));
+    {        
+        fileStorage.GetType().Should().Be<NoOpFileStorage>();
     }
 
     [Fact]
@@ -19,6 +15,15 @@ public class NoOpFileStorageTests(IFileStorage fileStorage)
         var result = await fileStorage.SaveAsync("file.txt", "text/plain", new MemoryStream(), CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeGreaterThan(FileUploadId.From(0));
+        result.Value.Should().BeGreaterThan(0);
+    }
+
+    [Fact]
+    public async Task Deletes_and_returns_greather_than_zero_number()
+    {
+        var result = await fileStorage.DeleteAsync();
+
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().BeGreaterThan(0);
     }
 }

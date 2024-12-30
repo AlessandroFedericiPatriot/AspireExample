@@ -1,4 +1,6 @@
-﻿namespace AspireExample.Infrastructure;
+﻿using AspireExample.Infrastructure.Services;
+
+namespace AspireExample.Infrastructure;
 
 public static class IServiceCollectionExtensions
 {

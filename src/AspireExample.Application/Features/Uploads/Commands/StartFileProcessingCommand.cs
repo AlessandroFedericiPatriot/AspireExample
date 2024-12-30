@@ -1,28 +1,35 @@
-﻿using AspireExample.Domain;
+﻿using System.Reflection.Metadata;
+using AspireExample.Domain;
 
-namespace AspireExample.Application.Uploads.Commands;
+namespace AspireExample.Application.Features.Uploads.Commands;
 
 public record class StartFileProcessingCommand(
     string FileName,
     string ContentType,
-    Stream FileStream) : ICommand<Result<FileUploadId>>
+    Stream FileStream) : ICommand<Result<int>>
 {
+    public static readonly string[] AllowedMimeTypes =
+    {
+        ApplicationPdf,
+        ImageJpeg,
+        ImagePng,
+        TextPlain
+    };
+
+    public const string ApplicationPdf = "application/pdf";
+    public const string ImageJpeg = "image/jpeg";
+    public const string ImagePng = "image/png";
+    public const string TextPlain = "text/plain";
+
     #region Validation
 
     internal class StartFileProcessingValidator : AbstractValidator<StartFileProcessingCommand>
     {
-        private static readonly string[] AllowedMimeTypes =
-        {
-            "application/pdf",
-            "image/jpeg",
-            "image/png"
-        };
-
         public StartFileProcessingValidator()
         {
             RuleFor(x => x.FileName)
                 .NotEmpty();
-            
+
             RuleFor(x => x.ContentType)
                 .NotEmpty()
                 .Must(value => AllowedMimeTypes.Contains(value, StringComparer.InvariantCultureIgnoreCase))

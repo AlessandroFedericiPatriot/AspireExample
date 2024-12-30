@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Ardalis.Result.AspNetCore;
-using AspireExample.Application.Uploads.Commands;
+using AspireExample.Application.Features.Uploads.Commands;
 
 namespace AspireExample.ApiService;
 
@@ -12,7 +12,7 @@ public static class FilesApiEndpoints
             async (IFormFile file, IMediator mediator, CancellationToken cancellationToken) =>
             {
                 // TODO check this looks good in swagger
-                Result<Domain.FileUploadId> result = await mediator.Send(
+                Result<int> result = await mediator.Send(
                     new StartFileProcessingCommand(
                         FileName: file.FileName,
                         ContentType: file.ContentType,

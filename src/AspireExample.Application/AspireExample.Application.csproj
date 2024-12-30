@@ -3,10 +3,11 @@
     <ProjectReference Include="..\AspireExample.Domain\AspireExample.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Digests\" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <Folder Include="Features\Digests\Queries\" />
   </ItemGroup>
 </Project>
