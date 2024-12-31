@@ -1,6 +1,6 @@
 ﻿namespace AspireExample.Domain;
 
-[ValueObject<int>]
+[ValueObject<int>(Conversions.EfCoreValueConverter)]
 public partial struct FileUploadId;
 
 public class FileUpload : TrackedEntity<FileUploadId>

@@ -2,10 +2,9 @@
 using AspireExample.Application.Interfaces;
 using AspireExample.Application.Services;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 using SharedKernel.Behaviors;
 
-namespace AspireExample.Application;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class IServiceCollectionExtensions
 {

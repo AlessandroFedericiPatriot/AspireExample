@@ -1,7 +1,7 @@
 ﻿
 namespace AspireExample.Domain;
 
-[ValueObject<int>]
+[ValueObject<int>(Conversions.EfCoreValueConverter)]
 public partial struct FileDigestId;
 
 public class FileDigest : TrackedEntity<FileDigestId>

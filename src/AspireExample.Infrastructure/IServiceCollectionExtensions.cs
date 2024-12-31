@@ -1,6 +1,7 @@
-﻿using AspireExample.Infrastructure.Services;
+﻿using AspireExample.Infrastructure.Data;
+using AspireExample.Infrastructure.Services;
 
-namespace AspireExample.Infrastructure;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class IServiceCollectionExtensions
 {
@@ -8,5 +9,5 @@ public static class IServiceCollectionExtensions
     {
         services.AddScoped<IFileStorage, LocalFileStorage>();
         return services;
-    }   
+    }
 }

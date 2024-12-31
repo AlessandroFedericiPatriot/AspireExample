@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspireExample.Application\AspireExample.Application.csproj" />
+    <ProjectReference Include="..\AspireExample.Infrastructure\AspireExample.Infrastructure.csproj" />
     <ProjectReference Include="..\AspireExample.ServiceDefaults\AspireExample.ServiceDefaults.csproj" />
   </ItemGroup>
 
@@ -9,6 +10,11 @@
     <PackageReference Include="Ardalis.Result.AspNetCore" />
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	  
   </ItemGroup>
 
 </Project>

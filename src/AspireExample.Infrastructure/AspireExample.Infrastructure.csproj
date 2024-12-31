@@ -2,14 +2,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspireExample.Application\AspireExample.Application.csproj" />
+    <ProjectReference Include="..\AspireExample.Domain\AspireExample.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\Configurations\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
 

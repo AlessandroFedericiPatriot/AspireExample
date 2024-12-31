@@ -1,5 +1,6 @@
 using AspireExample.Web;
 using AspireExample.Web.Components;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
