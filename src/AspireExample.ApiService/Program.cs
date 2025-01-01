@@ -1,5 +1,10 @@
+using System.Security.Claims;
 using AspireExample.ApiService;
+using AspireExample.Application.Interfaces;
 using AspireExample.Infrastructure.Data;
+using AspireExample.Infrastructure.Data.Interceptors;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +18,37 @@ builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
 
 // Patriot Software
+builder.Services.AddScoped<IUserContext>(sp => 
+{ 
+    var httpCtx = sp.GetService<HttpContextAccessor>();
+    
+    // TODO: temporary. Add Auth
+    var defaultClaims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, "John Doe"),
+        new Claim(ClaimTypes.NameIdentifier, "123"),
+        new Claim(ClaimTypes.Email, "") 
+    };
+    var principal = new ClaimsPrincipal(new ClaimsIdentity(defaultClaims));    
+
+    return new UserContext(httpCtx?.HttpContext?.User ?? principal);
+});
+
+
 builder.Services
     .AddApplication()
     .AddInfrastructure();
 
-builder.AddNpgsqlDbContext<AspireExampleDbContext>(connectionName: "postgresdb");
+builder.Services.AddScoped<ISaveChangesInterceptor, TrackedEntityInterceptor>();
+builder.Services.AddDbContext<AspireExampleDbContext>(
+    (sp, options) =>
+    {
+        var connStr = builder.Configuration.GetConnectionString("postgres-files");
+        options.UseNpgsql(connStr);
+        options.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
+    });
+
+builder.EnrichNpgsqlDbContext<AspireExampleDbContext>();
 
 var app = builder.Build();
 
@@ -27,7 +58,7 @@ app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    await SeedDataAsync(app);
+    await AspireExampleDbContextDataSeeder.SeedDataAsync(app);
 }
 
 // Endpoints
@@ -39,25 +70,3 @@ app.MapDefaultEndpoints();
 // Run
 app.Run();
 
-static Task SeedDataAsync(IHost host)
-{
-    using var scope = host.Services.CreateScope();
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<AspireExampleDbContext>();
-
-    // Rebuilds the DB
-    //context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
-
-    // Bogus
-    //var options = new DatabaseSeeder.GenerationOptions(
-    //    DbContext: context,
-    //    BlogsCount: 35,
-    //    PostsCount: 120,
-    //    SourcesCount: 90);
-    //
-    //await DatabaseSeeder.GenerateAsync(options);
-
-    return Task.CompletedTask;
-}

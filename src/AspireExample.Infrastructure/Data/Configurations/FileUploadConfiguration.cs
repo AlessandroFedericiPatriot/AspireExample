@@ -11,25 +11,26 @@ namespace AspireExample.Infrastructure.Data.Configurations;
 
 public class FileUploadConfiguration : IEntityTypeConfiguration<FileUpload>
 {
+    public const string TableName = "FileUploads";
+
     public void Configure(EntityTypeBuilder<FileUpload> builder)
     {
-        builder.ToTable("FileUploads");
-        builder.HasKey(e => e.Id);
+        builder.ToTable(TableName, DbConstants.FileProcessorSchema);
+
+        builder.ConfigureEntity(id => new FileUploadId(id), id => id.Value);
+        builder.ConfigureTrackedEntity();        
         
-        builder.Property(e => e.Id)
-            .HasConversion(new FileUploadId.EfCoreValueConverter());
         builder.Property(e => e.FileName)
             .IsRequired()
             .HasMaxLength(255);
+
         builder.Property(e => e.Location)
             .IsRequired();
         builder.Property(e => e.ContentType)
             .IsRequired()
             .HasMaxLength(255);
+
         builder.Property(e => e.Size)
             .IsRequired();
-        builder.Property(e => e.CreatedBy)
-            .IsRequired()
-            .HasMaxLength(255);        
     }
 }

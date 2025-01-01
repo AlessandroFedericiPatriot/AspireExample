@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
-    <PackageReference Include="Ardalis.Result" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" />
-    <PackageReference Include="Vogen" />
+    <PackageReference Include="Ardalis.Result" />    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />

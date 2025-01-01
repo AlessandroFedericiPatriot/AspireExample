@@ -1,30 +1,36 @@
 ﻿using AspireExample.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SharedKernel;
 
 namespace AspireExample.Infrastructure.Data.Configurations;
 
 public class FileDigestConfiguration : IEntityTypeConfiguration<FileDigest>
 {
+    public const string TableName = "FileDigests";
+
     public void Configure(EntityTypeBuilder<FileDigest> builder)
     {
-        builder.ToTable("FileDigests");
-        builder.HasKey(e => e.Id);
+        builder.ToTable(TableName, DbConstants.FileProcessorSchema);
 
-        builder.Property(e => e.Id)
-            .HasConversion(new FileDigestId.EfCoreValueConverter());
-        builder.Property(e => e.UploadId)
-            .IsRequired()
-            .HasConversion(new FileUploadId.EfCoreValueConverter());
+        builder.ConfigureEntity(id => new FileDigestId(id), id => id.Value);
+        builder.ConfigureTrackedEntity();
+        
+        builder.HasOne<FileUpload>()
+            .WithMany()
+            .HasForeignKey(e => e.UploadId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.Property(e => e.Subject)
             .IsRequired()
             .HasMaxLength(255);
+
         builder.Property(e => e.Summary)
             .HasMaxLength(255);
+
         builder.Property(e => e.Details)
-            .HasMaxLength(255);
-        builder.Property(e => e.CreatedBy)
-            .IsRequired()
             .HasMaxLength(255);
     }
 }

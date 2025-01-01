@@ -33,23 +33,23 @@ public class TrackedEntityInterceptor : SaveChangesInterceptor
 
     private void UpdateEntities(DbContext? context)
     {
-        //if (context == null) return;
+        if (context == null) return;
 
-        //foreach (var entry in context.ChangeTracker.Entries<ITrackedEntity>())
-        //{
-        //    var utcNow = _dateTime.GetUtcNow();
-        //    var uid = _user.Id ?? string.Empty;
+        foreach (var entry in context.ChangeTracker.Entries<ITrackedEntity>())
+        {
+            var utcNow = _dateTime.GetUtcNow();
+            var uid = _user.UserId ?? "UNSPECIFIED";
 
-        //    // TODO: I am not entirely sure HasChangedOwnedEntities() plays any role or not in Added
-        //    if (entry.State is EntityState.Added/* || entry.HasChangedOwnedEntities()*/)
-        //    {
-        //        entry.Entity.SetCreated(utcNow, uid);
-        //    }
-        //    else if (entry.State is EntityState.Modified || entry.HasChangedOwnedEntities())
-        //    {
-        //        entry.Entity.SetLastModified(utcNow, uid);
-        //    }
-        //}
+            // TODO: I am not entirely sure HasChangedOwnedEntities() plays any role or not in Added
+            if (entry.State is EntityState.Added/* || entry.HasChangedOwnedEntities()*/)
+            {
+                entry.Entity.MarkCreated(utcNow, uid);
+            }
+            else if (entry.State is EntityState.Modified || entry.HasChangedOwnedEntities())
+            {
+                entry.Entity.MarkUpdated(utcNow, uid);
+            }
+        }
     }
 }
 
