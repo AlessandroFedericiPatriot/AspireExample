@@ -17,6 +17,7 @@ public static class AspireExampleDbContextDataSeeder
         context.Database.EnsureDeleted();
         await context.Database.MigrateAsync();        
 
+        // File uploads
         var fileUploads = new List<FileUpload>
         {
             FileUpload.CreateNew("file1.txt", new Uri("http://example1"), "text/plain", 100),
@@ -25,9 +26,9 @@ public static class AspireExampleDbContextDataSeeder
         };
 
         await context.FileUploads.AddRangeAsync(fileUploads);
-
         await context.SaveChangesAsync();
 
+        // File digests
         var fileDigests = new List<FileDigest>
         {
             FileDigest.For(fileUploads[0], "Subject of file1", "Summary of file1", "Details of file1"),
@@ -38,14 +39,12 @@ public static class AspireExampleDbContextDataSeeder
         };
 
         await context.FileDigests.AddRangeAsync(fileDigests);
-
         await context.SaveChangesAsync();
 
-        // Tests
-
+        // Temp Tests, to remove
         var up1 = await context.FileUploads.FindAsync(fileUploads[0].Id);
         up1!.Size = 999;
-
+        
         await context.SaveChangesAsync();
     }
 }

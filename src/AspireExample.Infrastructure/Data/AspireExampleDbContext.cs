@@ -4,13 +4,9 @@ using SharedKernel.EntityFrameworkCore;
 
 namespace AspireExample.Infrastructure.Data;
 
-public class AspireExampleDbContext : DbContextBase
-{    
-    public AspireExampleDbContext(DbContextOptions<AspireExampleDbContext> options) 
-        : base(options)
-    {
-    }
-
+public class AspireExampleDbContext(DbContextOptions<AspireExampleDbContext> options) 
+    : DbContextBase(options)
+{
     public DbSet<FileUpload> FileUploads { get; set; } = null!;
     public DbSet<FileDigest> FileDigests { get; set; } = null!;
 }

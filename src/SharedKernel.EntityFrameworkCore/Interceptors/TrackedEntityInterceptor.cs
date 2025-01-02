@@ -6,44 +6,32 @@ using SharedKernel.Interfaces;
 
 namespace AspireExample.Infrastructure.Data.Interceptors;
 
-public class TrackedEntityInterceptor : SaveChangesInterceptor
+public class TrackedEntityInterceptor(
+    IUserContext user,
+    TimeProvider dateTime) : SaveChangesInterceptor
 {
-    private readonly IUserContext _user;
-    private readonly TimeProvider _dateTime;
-    private readonly ILogger<TrackedEntityInterceptor> _logger;
-
-    public TrackedEntityInterceptor(
-        IUserContext user,
-        TimeProvider dateTime,
-        ILogger<TrackedEntityInterceptor> logger)
-    {
-        _user = user;
-        _dateTime = dateTime;
-        _logger = logger;
-    }
-
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
-        UpdateEntities(eventData.Context);
+        MarkTrackedEntities(eventData.Context);
 
         return base.SavingChanges(eventData, result);
     }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
-        UpdateEntities(eventData.Context);
+        MarkTrackedEntities(eventData.Context);
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
-    private void UpdateEntities(DbContext? context)
+    private void MarkTrackedEntities(DbContext? context)
     {
         if (context == null) return;
 
         foreach (var entry in context.ChangeTracker.Entries<ITrackedEntity>())
         {
-            var utcNow = _dateTime.GetUtcNow();
-            var uid = _user.UserId ?? "UNSPECIFIED";
+            var utcNow = dateTime.GetUtcNow();
+            var uid = user.UserId ?? "UNSPECIFIED";
 
             // TODO: I am not entirely sure HasChangedOwnedEntities() plays any role or not in Added
             if (entry.State is EntityState.Added/* || entry.HasChangedOwnedEntities()*/)

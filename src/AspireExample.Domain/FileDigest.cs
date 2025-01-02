@@ -6,32 +6,23 @@ public readonly record struct FileDigestId(int Value)
     public static FileDigestId From(int value) => new(value);
 }
 
-public class FileDigest : TrackedEntityBase, IEntity<FileDigestId>, IAuditLog
+public class FileDigest(
+    FileUploadId uploadId, 
+    string subject, 
+    string? summary = default, 
+    string? details = default) 
+
+    : TrackedEntityBase, IEntity<FileDigestId>, IAuditLog
 {
-    public static FileDigest For(FileUploadId fileUploadId, string subject, string? summary = default, string? details = default)
-    {
-        var result = new FileDigest
-        {
-            UploadId = fileUploadId,
-            Subject = subject,
-            Summary = summary,
-            Details = details
-        };
-
-        return result;
-    }
-
     public static FileDigest For(FileUpload fileUpload, string subject, string? summary = default, string? details = default)
-        => For(fileUpload.Id, subject, summary, details);
-
-    private FileDigest() { /* For Entity Framework/HotChocolate */ }
+        => new (fileUpload.Id, subject, summary, details);
 
     // IEntity
-    public FileDigestId Id { get; private set; } = default;
+    public FileDigestId Id { get; private set; }
 
     // Specific to FileDigest
-    public FileUploadId UploadId { get; private set; } = default!;
-    public string Subject { get; private set; } = default!;
-    public string? Summary { get; private set; }
-    public string? Details { get; private set; }    
+    public FileUploadId UploadId { get; private set; } = uploadId;
+    public string Subject { get; private set; } = !string.IsNullOrWhiteSpace(subject) ? subject : throw new ArgumentNullException(nameof(subject));
+    public string? Summary { get; private set; } = summary;
+    public string? Details { get; private set; } = details;
 }

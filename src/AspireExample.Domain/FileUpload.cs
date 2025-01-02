@@ -6,27 +6,27 @@ public readonly record struct FileUploadId(int Value)
     public static FileUploadId From(int value) => new(value);
 }
 
-public class FileUpload : TrackedEntityBase, IEntity<FileUploadId>, IAuditLog
+public class FileUpload(
+    string fileName, 
+    Uri location, 
+    string contentType, 
+    long size) 
+
+    : TrackedEntityBase, IEntity<FileUploadId>, IAuditLog
 {
     public static FileUpload CreateNew(string fileName, Uri location, string contentType, long size)
     {
-        return new FileUpload
-        {
-            FileName = Guard.Against.NullOrEmpty(fileName, nameof(fileName)),
-            Location = Guard.Against.Null(location, nameof(location)),
-            ContentType = Guard.Against.NullOrEmpty(contentType, nameof(contentType)),
-            Size = Guard.Against.NegativeOrZero(size, nameof(size))
-        };
+        return new FileUpload(fileName, location, contentType, size);        
     }
 
-    private FileUpload() { /* For Entity Framework/HotChocolate */ }
-
     // IEntity
-    public FileUploadId Id { get; private set; } = FileUploadId.Empty;
+    public FileUploadId Id { get; private set; }
 
     // Specific to FileUpload
-    public string FileName { get; private set; } = default!;
-    public Uri Location { get; private set; } = default!;
-    public string ContentType { get; private set; } = default!;
-    public long Size { get; set; }
+    public string FileName { get; private set; } = !string.IsNullOrWhiteSpace(fileName) ? fileName : throw new ArgumentNullException(nameof(fileName));    
+    public Uri Location { get; private set; } = location ?? throw new ArgumentNullException(nameof(location));
+
+    public string ContentType { get; private set; } = !string.IsNullOrWhiteSpace(contentType) ? contentType : throw new ArgumentNullException(nameof(contentType));
+
+    public long Size { get; set; } = size > 0 ? size : throw new ArgumentOutOfRangeException(nameof(size));
 }
