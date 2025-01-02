@@ -26,6 +26,7 @@ public class FileUploadConfiguration : IEntityTypeConfiguration<FileUpload>
 
         builder.Property(e => e.Location)
             .IsRequired();
+
         builder.Property(e => e.ContentType)
             .IsRequired()
             .HasMaxLength(255);

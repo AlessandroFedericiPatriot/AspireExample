@@ -1,14 +1,12 @@
 ﻿namespace AspireExample.Domain;
 
-
-
 public readonly record struct FileUploadId(int Value) 
 {
     public static FileUploadId Empty { get; } = default;
     public static FileUploadId From(int value) => new(value);
 }
 
-public class FileUpload : TrackedEntityBase, IEntity<FileUploadId>
+public class FileUpload : TrackedEntityBase, IEntity<FileUploadId>, IAuditLog
 {
     public static FileUpload CreateNew(string fileName, Uri location, string contentType, long size)
     {
@@ -30,5 +28,5 @@ public class FileUpload : TrackedEntityBase, IEntity<FileUploadId>
     public string FileName { get; private set; } = default!;
     public Uri Location { get; private set; } = default!;
     public string ContentType { get; private set; } = default!;
-    public long Size { get; private set; }
+    public long Size { get; set; }
 }

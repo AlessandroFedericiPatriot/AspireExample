@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AspireExample.Infrastructure;
+﻿namespace AspireExample.Infrastructure;
 
 internal class DbConstants
 {
-    public const string FileProcessorSchema = "FileProcessor";
+    public const string FileProcessorSchema = "file_processor";
 }

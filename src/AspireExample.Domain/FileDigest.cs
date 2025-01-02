@@ -6,7 +6,7 @@ public readonly record struct FileDigestId(int Value)
     public static FileDigestId From(int value) => new(value);
 }
 
-public class FileDigest : TrackedEntityBase, IEntity<FileDigestId>
+public class FileDigest : TrackedEntityBase, IEntity<FileDigestId>, IAuditLog
 {
     public static FileDigest For(FileUploadId fileUploadId, string subject, string? summary = default, string? details = default)
     {

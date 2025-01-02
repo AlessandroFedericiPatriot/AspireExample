@@ -20,35 +20,27 @@ builder.Services.AddOpenApi();
 // Patriot Software
 builder.Services.AddScoped<IUserContext>(sp => 
 { 
-    var httpCtx = sp.GetService<HttpContextAccessor>();
+    var httpCtx = sp.GetService<IHttpContextAccessor>();
     
     // TODO: temporary. Add Auth
     var defaultClaims = new List<Claim>
     {
-        new Claim(ClaimTypes.Name, "John Doe"),
-        new Claim(ClaimTypes.NameIdentifier, "123"),
-        new Claim(ClaimTypes.Email, "") 
+        new Claim(ClaimTypes.Name, "johndoe@example.com"),
+        new Claim(ClaimTypes.NameIdentifier, "John Doe"),
+        new Claim(ClaimTypes.Email, "johndoe@example.com") 
     };
     var principal = new ClaimsPrincipal(new ClaimsIdentity(defaultClaims));    
 
     return new UserContext(httpCtx?.HttpContext?.User ?? principal);
 });
 
+var connStr = builder.Configuration.GetConnectionString("postgres-files");
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(connStr!);
 
-builder.Services.AddScoped<ISaveChangesInterceptor, TrackedEntityInterceptor>();
-builder.Services.AddDbContext<AspireExampleDbContext>(
-    (sp, options) =>
-    {
-        var connStr = builder.Configuration.GetConnectionString("postgres-files");
-        options.UseNpgsql(connStr);
-        options.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
-    });
-
-builder.EnrichNpgsqlDbContext<AspireExampleDbContext>();
+builder.EnrichNpgsqlDbContext<AspireExampleDbContext>(); // Add Aspire configuration
 
 var app = builder.Build();
 

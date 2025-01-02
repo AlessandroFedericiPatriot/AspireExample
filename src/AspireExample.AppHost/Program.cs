@@ -9,21 +9,17 @@ var cache = builder.AddRedis("cache")
 //var dbPassword = builder.AddParameter("db-password", secret: true);
 //var value = builder.Configuration["Parameters:db-password"];
 
-var postgres = builder.AddPostgres("postgres")//, password: dbPassword)
+var postgres = builder.AddPostgres("postgres", port: 13495)//, password: dbPassword)
                       .WithDataVolume("postgres-data", isReadOnly: false)
-                      .WithLifetime(ContainerLifetime.Persistent);
-postgres
-                      .WithPgAdmin(c =>
-                      {                          
-                          // Somehow it always rebuilds. 
-                          c.WithReference(postgres).WaitFor(postgres)
-                           .WithLifetime(ContainerLifetime.Persistent);
-                      });
+                      .WithLifetime(ContainerLifetime.Persistent)
+                      //.WithPgAdmin()
+                      .WithExternalHttpEndpoints()
+                      ;
 
 var postgresdb = postgres.AddDatabase("postgres-files");
 
 var apiService = builder.AddProject<Projects.AspireExample_ApiService>("apiservice")
-                        //.WithReference(postgres).WaitFor(postgres)
+                        .WithReference(postgres).WaitFor(postgres)
                         .WithReference(postgresdb).WaitFor(postgresdb);
 
 builder.AddProject<Projects.AspireExample_Web>("webfrontend")

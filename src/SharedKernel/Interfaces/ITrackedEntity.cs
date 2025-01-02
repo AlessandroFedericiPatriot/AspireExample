@@ -1,4 +1,5 @@
-﻿namespace SharedKernel;
+﻿using System.Security.Cryptography;
+namespace SharedKernel.Interfaces;
 
 public interface ITrackedEntity
 {

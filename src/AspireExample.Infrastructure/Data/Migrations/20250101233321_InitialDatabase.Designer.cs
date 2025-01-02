@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AspireExample.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AspireExampleDbContext))]
-    [Migration("20250101212833_CreateDatabase2")]
-    partial class CreateDatabase2
+    [Migration("20250101233321_InitialDatabase")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTimeOffset>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("now()");
@@ -59,7 +59,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("UploadId")
@@ -69,7 +69,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
 
                     b.HasIndex("UploadId");
 
-                    b.ToTable("FileDigests", "FileProcessor");
+                    b.ToTable("FileDigests", "file_processor");
                 });
 
             modelBuilder.Entity("AspireExample.Domain.FileUpload", b =>
@@ -90,7 +90,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTimeOffset>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("now()");
@@ -110,12 +110,12 @@ namespace AspireExample.Infrastructure.Data.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileUploads", "FileProcessor");
+                    b.ToTable("FileUploads", "file_processor");
                 });
 
             modelBuilder.Entity("AspireExample.Domain.FileDigest", b =>

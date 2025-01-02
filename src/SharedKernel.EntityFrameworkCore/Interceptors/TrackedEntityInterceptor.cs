@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
+using SharedKernel.Interfaces;
 
 namespace AspireExample.Infrastructure.Data.Interceptors;
 
@@ -8,13 +10,16 @@ public class TrackedEntityInterceptor : SaveChangesInterceptor
 {
     private readonly IUserContext _user;
     private readonly TimeProvider _dateTime;
+    private readonly ILogger<TrackedEntityInterceptor> _logger;
 
     public TrackedEntityInterceptor(
         IUserContext user,
-        TimeProvider dateTime)
+        TimeProvider dateTime,
+        ILogger<TrackedEntityInterceptor> logger)
     {
         _user = user;
         _dateTime = dateTime;
+        _logger = logger;
     }
 
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)

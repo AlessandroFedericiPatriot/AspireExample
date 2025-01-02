@@ -40,5 +40,12 @@ public static class AspireExampleDbContextDataSeeder
         await context.FileDigests.AddRangeAsync(fileDigests);
 
         await context.SaveChangesAsync();
+
+        // Tests
+
+        var up1 = await context.FileUploads.FindAsync(fileUploads[0].Id);
+        up1!.Size = 999;
+
+        await context.SaveChangesAsync();
     }
 }

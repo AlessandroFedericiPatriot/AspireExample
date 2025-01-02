@@ -39,6 +39,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.SharedKernel", "6.SharedK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.EntityFrameworkCore", "src\SharedKernel.EntityFrameworkCore\SharedKernel.EntityFrameworkCore.csproj", "{1E465EF4-A627-419A-8E31-DB8946A75DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel.AspNetCore", "SharedKernel.AspNetCore\SharedKernel.AspNetCore.csproj", "{B79BFB43-5C0A-463A-9CCF-3C3DC2669744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,14 @@ Global
 		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E465EF4-A627-419A-8E31-DB8946A75DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E465EF4-A627-419A-8E31-DB8946A75DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E465EF4-A627-419A-8E31-DB8946A75DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E465EF4-A627-419A-8E31-DB8946A75DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79BFB43-5C0A-463A-9CCF-3C3DC2669744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79BFB43-5C0A-463A-9CCF-3C3DC2669744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79BFB43-5C0A-463A-9CCF-3C3DC2669744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79BFB43-5C0A-463A-9CCF-3C3DC2669744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +112,7 @@ Global
 		{10C006CD-23E1-4A9C-AA41-1E180FC67E4C} = {3B0794BE-4CBA-4BFF-82F0-21ABB4C03285}
 		{326F2FD5-A91F-43D9-A1E8-4B04D63D86E0} = {3DD11CEA-DBCA-4890-B9B3-7B76139FB0B1}
 		{99013EB2-BB30-4A73-9F9F-AFEE6B448B2F} = {7ACC7BC4-F7FD-4CC8-9C8F-C3FD1373C9EF}
+		{1E465EF4-A627-419A-8E31-DB8946A75DFD} = {7ACC7BC4-F7FD-4CC8-9C8F-C3FD1373C9EF}
+		{B79BFB43-5C0A-463A-9CCF-3C3DC2669744} = {7ACC7BC4-F7FD-4CC8-9C8F-C3FD1373C9EF}
 	EndGlobalSection
 EndGlobal

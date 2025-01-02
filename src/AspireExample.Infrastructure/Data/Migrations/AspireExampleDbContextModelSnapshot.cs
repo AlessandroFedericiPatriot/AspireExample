@@ -35,7 +35,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTimeOffset>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("now()");
@@ -56,7 +56,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("UploadId")
@@ -66,7 +66,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
 
                     b.HasIndex("UploadId");
 
-                    b.ToTable("FileDigests", "FileProcessor");
+                    b.ToTable("FileDigests", "file_processor");
                 });
 
             modelBuilder.Entity("AspireExample.Domain.FileUpload", b =>
@@ -87,7 +87,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTimeOffset>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("now()");
@@ -107,12 +107,12 @@ namespace AspireExample.Infrastructure.Data.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileUploads", "FileProcessor");
+                    b.ToTable("FileUploads", "file_processor");
                 });
 
             modelBuilder.Entity("AspireExample.Domain.FileDigest", b =>

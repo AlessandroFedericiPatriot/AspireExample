@@ -7,30 +7,30 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AspireExample.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabase : Migration
+    public partial class InitialDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "FileProcessor");
+                name: "file_processor");
 
             migrationBuilder.CreateTable(
                 name: "FileUploads",
-                schema: "FileProcessor",
+                schema: "file_processor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:IdentitySequenceOptions", "'1', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     FileName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Location = table.Column<string>(type: "text", nullable: false),
                     ContentType = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Size = table.Column<long>(type: "bigint", nullable: false)
+                    Size = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,20 +39,20 @@ namespace AspireExample.Infrastructure.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FileDigests",
-                schema: "FileProcessor",
+                schema: "file_processor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:IdentitySequenceOptions", "'1', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UploadId = table.Column<int>(type: "integer", nullable: false),
                     Subject = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Summary = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    Details = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true)
+                    Details = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
                     table.ForeignKey(
                         name: "FK_FileDigests_FileUploads_UploadId",
                         column: x => x.UploadId,
-                        principalSchema: "FileProcessor",
+                        principalSchema: "file_processor",
                         principalTable: "FileUploads",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -68,7 +68,7 @@ namespace AspireExample.Infrastructure.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_FileDigests_UploadId",
-                schema: "FileProcessor",
+                schema: "file_processor",
                 table: "FileDigests",
                 column: "UploadId");
         }
@@ -78,11 +78,11 @@ namespace AspireExample.Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "FileDigests",
-                schema: "FileProcessor");
+                schema: "file_processor");
 
             migrationBuilder.DropTable(
                 name: "FileUploads",
-                schema: "FileProcessor");
+                schema: "file_processor");
         }
     }
 }

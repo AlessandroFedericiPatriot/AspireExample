@@ -1,9 +1,12 @@
-﻿namespace SharedKernel;
+﻿using System.Runtime.InteropServices;
+using SharedKernel.Interfaces;
+
+namespace SharedKernel;
 
 /// <summary>
 /// Base class for entities that need to be tracked.
 /// </summary>
-public class TrackedEntityBase : ITrackedEntity
+public class TrackedEntityBase : HasDomainEventsBase, ITrackedEntity
 {
     public string CreatedBy { get; private set; } = default!;
     public DateTimeOffset CreatedOn { get; private set; } = default!;

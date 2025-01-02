@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspireExample.Application\AspireExample.Application.csproj" />
     <ProjectReference Include="..\AspireExample.Domain\AspireExample.Domain.csproj" />
+    <ProjectReference Include="..\SharedKernel.EntityFrameworkCore\SharedKernel.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
